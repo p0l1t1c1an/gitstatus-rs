@@ -52,7 +52,7 @@ For example, this is mine:
 
 #### Difference from original gitstatus
 ##### Up and Down Arrows
-I change the up/down arrows to & and | these mean ahead/behind the remote.
+I change the up/down arrows to & and | these mean ahead/behind the remote.  
 Not sure why its just what I chose. I didn't really like the arrows.
 
 ##### Left and Right Arrows
