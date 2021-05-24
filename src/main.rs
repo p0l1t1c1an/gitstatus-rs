@@ -7,7 +7,8 @@ use git2::Error;
 /*
  * Icons for status to be printed 
  * (similar to romkatv/gitstatus)
- * 
+ *
+ *  @ = At this commit
  *  | = behind of remote
  *  & = ahead of remote
  *  ~ = merge conflicts
@@ -27,7 +28,7 @@ const UNSTAGED_ICON: char = '!';
 const UNTRACKED_ICON: char = '?'; 
 
 fn main() -> Result<(), Error> {
-    if let Ok(mut repo) = Repository::open(".") {
+    if let Ok(mut repo) = Repository::discover(".") {
         let mut prompt = String::new();
 
         if let Ok(head_ref) = repo.head() { 
@@ -36,16 +37,17 @@ fn main() -> Result<(), Error> {
                 prompt += &String::from_utf8_lossy(head_ref.shorthand_bytes());
                 
                 if let Some(head_name) = head_ref.name() {
-                    let orig_name = repo.branch_upstream_name(&head_name)?;
-                    if let Ok(orig_ref) = repo.find_reference(&String::from_utf8_lossy(&orig_name)) {
-                        let orig_commit = orig_ref.peel_to_commit()?;
-                        let (ahead, behind) = repo.graph_ahead_behind(head_commit.id(), orig_commit.id())?;
-                
-                        if behind > 0 {
-                            prompt += &format!(" {}{}", BEHIND_ICON, behind);
-                        }
-                        if ahead > 0 {
-                            prompt += &format!(" {}{}", AHEAD_ICON, ahead);
+                    if let Ok(orig_name) = repo.branch_upstream_name(&head_name) {
+                        if let Ok(orig_ref) = repo.find_reference(&String::from_utf8_lossy(&orig_name)) {
+                            let orig_commit = orig_ref.peel_to_commit()?;
+                            let (ahead, behind) = repo.graph_ahead_behind(head_commit.id(), orig_commit.id())?;
+                    
+                            if behind > 0 {
+                                prompt += &format!(" {}{}", BEHIND_ICON, behind);
+                            }
+                            if ahead > 0 {
+                                prompt += &format!(" {}{}", AHEAD_ICON, ahead);
+                            }
                         }
                     }
                 }
@@ -87,11 +89,14 @@ fn main() -> Result<(), Error> {
             let s = entry.status();
             if s.intersects(Status::CONFLICTED) {
                 conflicted += 1;
-            } else if s.intersects(Status::WT_NEW) {
+            } 
+            if s.intersects(Status::WT_NEW) {
                 untracked += 1;
-            } else if s.intersects(staged_bits) {
+            } 
+            if s.intersects(staged_bits) {
                 staged += 1;
-            } else if s.intersects(unstaged_bits) {
+            } 
+            if s.intersects(unstaged_bits) {
                 unstaged += 1;
             }
         }
