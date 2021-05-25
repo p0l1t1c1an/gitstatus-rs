@@ -1,10 +1,10 @@
 # gitstatus-rs
 Uber simplified version of gitstatus used in Powerlevel10k
 
-#### Why if gitstatus already exists
+#### Why if gitstatus already exists?
 I wanted to use gitstatus on my OpenBSD system, but it seems to not support OpenBSD by default.  
 Then, I decided to build a simple script using the git command, which was really slow and irritating.  
-Finally, I made this simple Rust "script" using libgit2 which is like 10 times the speed of that script.  
+Finally, I made this simple Rust program using libgit2 which is like 10 times the speed of that script.
 Ultimately, this is a possible alternative for users that aren't supported, which is seemingly very few. 
 
 #### Installation
@@ -22,8 +22,8 @@ Now a gitstatus binary should be install in your `$CARGO_HOME/bin` or `$HOME/.ca
 
 #### Adding to Powerlevel10k
 
-First, you need to make prompt_gitstatus function in your .p10k.zsh.
-For example, this is mine:
+First, you need to make prompt_gitstatus function in your .p10k.zsh.  
+Example:
 ```
   function prompt_gitstatus() {
     out=$(path_to_cargo_home/bin/gitstatus)         
@@ -38,7 +38,7 @@ You will want to change the executable path and the -f and -i argument in p10k s
 -i is the icon for to be printed before the text (I put in git as a placeholder)  
 
 Next, you will need to add `gitstatus` to your left or right elements in .p10k.zsh.   
-For example, this is mine:
+Example:
 ```
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
