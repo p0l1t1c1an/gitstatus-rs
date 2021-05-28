@@ -4,7 +4,7 @@ Uber simplified version of gitstatus used in Powerlevel10k
 #### Why if gitstatus already exists?
 I wanted to use gitstatus on my OpenBSD system, but it seems to not support OpenBSD by default.  
 Then, I decided to build a simple script using the git command, which was really slow and irritating.  
-Finally, I made this simple Rust program using libgit2 which is like 10 times the speed of that script.
+Finally, I made this simple Rust program using libgit2 which is like 10 times the speed of that script.  
 Ultimately, this is a possible alternative for users that aren't supported, which is seemingly very few. 
 
 #### Installation
