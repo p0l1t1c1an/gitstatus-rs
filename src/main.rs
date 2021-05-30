@@ -30,6 +30,10 @@ fn main() -> Result<(), Error> {
     if let Ok(mut repo) = Repository::discover(".") {
         let mut prompt = String::new();
 
+        if let git2::RepositoryState::Merge = repo.state() {
+            prompt += "merge ";
+        }
+
         if let Ok(head_ref) = repo.head() {
             let head_commit = head_ref.peel_to_commit()?;
             if head_ref.is_branch() {
