@@ -22,7 +22,7 @@ Now a gitstatus binary should be install in your `$CARGO_HOME/bin` or `$HOME/.ca
 
 #### Adding to Powerlevel10k
 
-First, you need to make prompt_gitstatus function in your .p10k.zsh.  
+First, you need to make prompt_gitstatus function in your .zshrc or .p10k.zsh.  
 Example:
 ```
   function prompt_gitstatus() {
@@ -58,7 +58,7 @@ Not sure why its just what I chose. I didn't really like the arrows.
 ##### Left and Right Arrows
 The left/right arrow symbols are missing which represent behind/ahead the push remote.  
 I don't know what this means compared to the down/up arrows meaning behind/ahead the remote.  
-(What is the push remote vs the remote?)
+(What is the push remote vs the remote? I have no idea but would love to figure it out.)
 
 ##### Merge Status
 The original gitstatus prints out 'merge' if you are merging branches.  
