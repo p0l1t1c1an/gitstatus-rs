@@ -59,7 +59,7 @@ fn main() -> Result<(), Error> {
                 }
             } else {
                 let mut hash = format!("{}{}", COMMIT_ICON, head_commit.id());
-                hash.truncate(7);
+                hash.truncate(8);
                 prompt += &hash;
             }
         }
